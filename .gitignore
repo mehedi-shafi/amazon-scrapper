@@ -1,0 +1,6 @@
+temp/
+.env/
+data/
+.vscode/
+__pycache__/
+output.txt
