@@ -7,8 +7,8 @@ import urllib.parse as urlparse
 from urllib.parse import parse_qs
 
 def scrape(address, agent):
-    print(f'Using agent: {agent}')
-    print(f'Scraping url: {address}')
+    print('Using agent: {}'.format(agent))
+    print('Scraping url: {}'.format(address))
 
     request = urllib.request.Request(
         address,
@@ -41,7 +41,7 @@ def getLinks(soup):
     baseUrl = 'https://www.amazon.es'
 
     for obj in linkObjects:
-        formedUrl = f'{baseUrl}{obj["href"]}'
+        formedUrl = '{}{}'.format(baseUrl, obj['href'])
         if validItem(formedUrl):
             links.append(formedUrl)
     
@@ -58,7 +58,7 @@ def getProductId(url):
         pathSplits = path.split('/')
         prodId = pathSplits[pathSplits.index('dp') + 1]
     except Exception as E:
-        print(f'Error on url: {url}')
+        print('Error on url: {}'.format(url))
         print(E)
     return prodId
 

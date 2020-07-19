@@ -51,7 +51,7 @@ def crawler():
         currentPage += 1
         
         if currentPage % LONG_GAP_AFTER == 0:
-            print(f'SLEEPING FOR {LONG_SLEEP_TIMER}')
+            print('SLEEPING FOR {}'.format(LONG_SLEEP_TIMER))
             sleep(LONG_SLEEP_TIMER / 1000)
 
         sleep(INTERMEDIATE_SLEEP_TIME  / 1000)

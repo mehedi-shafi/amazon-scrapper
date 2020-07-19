@@ -27,7 +27,7 @@ def startCrawling(startPage=1,endPage=None):
 
     while continueScraping:
         print()
-        print(f'Current page # {currentPage}')
+        print('Current page # {}'.format(currentPage))
         if currentPage == 1:
             url = BASE_URL
         else:
@@ -51,7 +51,7 @@ def startCrawling(startPage=1,endPage=None):
         currentPage += 1
         
         if currentPage % LONG_GAP_AFTER == 0:
-            print(f'SLEEPING FOR {LONG_SLEEP_TIMER}')
+            print('SLEEPING FOR {}'.format(LONG_SLEEP_TIMER))
             sleep(LONG_SLEEP_TIMER / 1000)
 
         sleep(INTERMEDIATE_SLEEP_TIME  / 1000)
