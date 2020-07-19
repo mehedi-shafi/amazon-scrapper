@@ -17,20 +17,22 @@ SAVE_FILE_PATH = 'data/async_t{}.csv'
 
 AGENTS = UserAgent()
 
-outputDataframe = pd.DataFrame(columns=['url', 'short_code'])
+# outputDataframe = pd.DataFrame(columns=['url', 'short_code'])
 
 q = queue.Queue()
 
-def saveData(links, threadnumber):
+def saveData(df, links, threadnumber):
     global outputDataFrame, SAVE_FILE_PATH
     for link in links:
-        outputDataframe.loc[len(outputDataframe)] = [link, scraper.getProductId(link)]
-    outputDataframe.to_csv(SAVE_FILE_PATH.format(threadnumber), index=False)
+        df.loc[len(df)] = [link, scraper.getProductId(link)]
+    df.to_csv(SAVE_FILE_PATH.format(threadnumber), index=False)
 
 def crawler(threadnumber):
     continueScraping = True
     trial = 0
     currentPage = 1
+
+    outputDataframe = pd.DataFrame(columns=['url', 'short_code'])
 
     while continueScraping:
         url = q.get()
@@ -58,7 +60,7 @@ def crawler(threadnumber):
             print('SLEEPING FOR {}'.format(LONG_SLEEP_TIMER))
             sleep(LONG_SLEEP_TIMER / 1000)
 
-        saveData(links, threadnumber)
+        saveData(outputDataframe, links, threadnumber)
         sleep(INTERMEDIATE_SLEEP_TIME  / 1000)
         q.task_done()
 
